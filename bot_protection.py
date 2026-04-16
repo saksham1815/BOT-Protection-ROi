@@ -336,54 +336,89 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ─── Navigation ────────────────────────────────────────────────────────────────
+default_page = st.session_state.get("nav_page", "🏠 Home")
+
 page = st.sidebar.radio(
     "Navigation",
     ["🏠 Home", "🎟️ Ticket Booking", "🕷️ Scraping", "🔐 Account Takeover (ATO)"],
+    index=["🏠 Home", "🎟️ Ticket Booking", "🕷️ Scraping", "🔐 Account Takeover (ATO)"].index(default_page),
     label_visibility="collapsed"
 )
-
 st.sidebar.markdown("---")
 st.sidebar.markdown("<div style='color:#8b949e;font-size:12px;'>Bot Protection ROI Suite</div>", unsafe_allow_html=True)
 
+
+# Replace your current HOME section with this updated clickable version
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # HOME
 # ═══════════════════════════════════════════════════════════════════════════════
 if page == "🏠 Home":
+
+    st.markdown("## 🚀 Quick Navigation")
+    st.markdown("<p style='color:#8b949e;'>Jump directly to any ROI calculator</p>", unsafe_allow_html=True)
+
     col1, col2, col3 = st.columns(3)
+
     with col1:
         st.markdown("""
-        <div class="metric-card" style="text-align:center;cursor:pointer;">
-            <div style="font-size:36px;margin-bottom:8px;">🎟️</div>
-            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;margin-bottom:4px;">Ticket Booking</div>
-            <div style="color:#8b949e;font-size:13px;">Seat spinning & scalping attack ROI</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        st.markdown("""
-        <div class="metric-card" style="text-align:center;cursor:pointer;">
-            <div style="font-size:36px;margin-bottom:8px;">🕷️</div>
-            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;margin-bottom:4px;">Scraping</div>
-            <div style="color:#8b949e;font-size:13px;">Data scraping & competitive intel ROI</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col3:
-        st.markdown("""
-        <div class="metric-card" style="text-align:center;cursor:pointer;">
-            <div style="font-size:36px;margin-bottom:8px;">🔐</div>
-            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;margin-bottom:4px;">Account Takeover</div>
-            <div style="color:#8b949e;font-size:13px;">ATO credential stuffing ROI</div>
+        <div class="metric-card" style="text-align:center;">
+            <div style="font-size:38px;">🎟️</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:16px;margin-top:8px;">
+                Ticket Booking
+            </div>
+            <div style="color:#8b949e;font-size:13px;margin-top:4px;">
+                Seat spinning & scalping ROI
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
+        if st.button("Open Ticket Booking", key="go_ticket"):
+            st.session_state["nav_page"] = "🎟️ Ticket Booking"
+            st.rerun()
+
+    with col2:
+        st.markdown("""
+        <div class="metric-card" style="text-align:center;">
+            <div style="font-size:38px;">🕷️</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:16px;margin-top:8px;">
+                Scraping
+            </div>
+            <div style="color:#8b949e;font-size:13px;margin-top:4px;">
+                Data scraping ROI
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open Scraping", key="go_scraping"):
+            st.session_state["nav_page"] = "🕷️ Scraping"
+            st.rerun()
+
+    with col3:
+        st.markdown("""
+        <div class="metric-card" style="text-align:center;">
+            <div style="font-size:38px;">🔐</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:16px;margin-top:8px;">
+                Account Takeover
+            </div>
+            <div style="color:#8b949e;font-size:13px;margin-top:4px;">
+                Credential stuffing ROI
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open ATO", key="go_ato"):
+            st.session_state["nav_page"] = "🔐 Account Takeover (ATO)"
+            st.rerun()
+
     st.markdown("<br>", unsafe_allow_html=True)
+
     st.markdown("""
     <div class="metric-card">
         <div class="metric-label">How to use</div>
         <div style="margin-top:12px;color:#e6edf3;font-size:14px;line-height:1.7;">
-            Select an attack vector from the <b>sidebar</b>, fill in your business parameters,
-            choose a time period, and click <b>Calculate ROI</b> to see your projected
-            protection value and return on investment.
+            Use the quick buttons above or sidebar navigation to jump directly
+            into each ROI calculator.
         </div>
     </div>
     """, unsafe_allow_html=True)
