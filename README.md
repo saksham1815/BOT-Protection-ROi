@@ -1,4 +1,3 @@
-````markdown
 # 🛡️ Bot Protection ROI Dashboard
 
 A modern **Streamlit-based ROI calculator** built to estimate the financial impact of bot attacks and measure the return on investment (ROI) from deploying bot mitigation solutions.
@@ -26,8 +25,6 @@ Net ROI = Revenue Recovered + Infra Savings - Protection Cost
 ```math
 ROI Ratio = (Revenue Recovered + Infra Savings) / Protection Cost
 ```
-
----
 
 # 🎟️ Ticket Booking / Seat Spinning ROI
 
