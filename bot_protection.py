@@ -235,7 +235,7 @@ def metric_card(label, value, color="green"):
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">{label}</div>
-        <div class="metric-value" style="color:{c}">₹{value}</div>
+        <div class="metric-value" style="color:{c}">${value}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -437,7 +437,7 @@ elif page == "🎟️ Ticket Booking":
     with left:
         st.markdown("<div class='section-header'>Traffic Parameters</div>", unsafe_allow_html=True)
         seats = st.number_input("Total Seats / Inventory", min_value=0.0, value=100000.0, step=1000.0, format="%.0f")
-        price = st.number_input("Average Ticket Price (₹)", min_value=0.0, value=1500.0, step=100.0)
+        price = st.number_input("Average Ticket Price ($)", min_value=0.0, value=1500.0, step=100.0)
         period = st.selectbox("Time Period", ["Monthly", "Quarterly", "Half Yearly", "Yearly"])
 
         st.markdown("<div class='section-header'>Conversion Rates</div>", unsafe_allow_html=True)
@@ -447,8 +447,8 @@ elif page == "🎟️ Ticket Booking":
         mitigation = st.number_input("Mitigation Effectiveness (%)", min_value=0.0, max_value=100.0, value=80.0, step=1.0)
 
         st.markdown("<div class='section-header'>Costs</div>", unsafe_allow_html=True)
-        infra_cost = st.number_input("Infra Cost per 1K Requests (₹)", min_value=0.0, value=25.0, step=1.0)
-        protection_cost = st.number_input("Bot Protection Cost (₹)", min_value=0.0, value=200000.0, step=10000.0, format="%.0f")
+        infra_cost = st.number_input("Infra Cost per 1K Requests ($)", min_value=0.0, value=25.0, step=1.0)
+        protection_cost = st.number_input("Bot Protection Cost ($)", min_value=0.0, value=200000.0, step=10000.0, format="%.0f")
 
         calc = st.button("Calculate ROI", key="ticket_calc", type="primary")
 
@@ -484,7 +484,7 @@ elif page == "🎟️ Ticket Booking":
             import pandas as pd
             chart_data = pd.DataFrame({
                 "Category": ["Expected", "Under Attack", "Recovered", "Infra Saved"],
-                "Value (₹)": [r['expected'], r['impacted'], r['recovered'], r['infra_saved']]
+                "Value ($)": [r['expected'], r['impacted'], r['recovered'], r['infra_saved']]
             })
             st.markdown("<div class='section-header'>Breakdown Chart</div>", unsafe_allow_html=True)
             st.bar_chart(chart_data.set_index("Category"), color="#58a6ff")
@@ -526,7 +526,7 @@ elif page == "🕷️ Scraping":
 
         if model in ["Auto (Recommended)", "L2B Model", "Value per Request"]:
             st.markdown("<div class='section-header'>Model Parameters</div>", unsafe_allow_html=True)
-            value = st.number_input("Value per Booking/Session (₹)", min_value=0.0, value=2000.0, step=100.0)
+            value = st.number_input("Value per Booking/Session ($)", min_value=0.0, value=2000.0, step=100.0)
             if model in ["Auto (Recommended)", "L2B Model"]:
                 l2b = st.number_input("Lookups to Booking Ratio (L2B)", min_value=0.0, value=0.0, step=1.0,
                                       help="Leave 0 for Auto fallback to Value per Request")
@@ -535,22 +535,22 @@ elif page == "🕷️ Scraping":
         elif model == "Conversion Impact":
             st.markdown("<div class='section-header'>Model Parameters</div>", unsafe_allow_html=True)
             conversion_drop = st.number_input("Conversion Drop (%)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
-            aov = st.number_input("Average Order Value (₹)", min_value=0.0, value=2000.0, step=100.0)
+            aov = st.number_input("Average Order Value ($)", min_value=0.0, value=2000.0, step=100.0)
 
         elif model == "Price Undercut Impact":
             st.markdown("<div class='section-header'>Model Parameters</div>", unsafe_allow_html=True)
-            total_revenue = st.number_input("Total Revenue (₹)", min_value=0.0, value=50000000.0, step=100000.0, format="%.0f")
+            total_revenue = st.number_input("Total Revenue ($)", min_value=0.0, value=50000000.0, step=100000.0, format="%.0f")
             price_impact = st.number_input("Revenue Loss from Undercutting (%)", min_value=0.0, max_value=100.0, value=5.0, step=0.1)
 
         elif model == "Lead Theft Model":
             st.markdown("<div class='section-header'>Model Parameters</div>", unsafe_allow_html=True)
             data_rate = st.number_input("Data Extraction Rate (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.5)
             lead_conv = st.number_input("Lead Conversion Rate (%)", min_value=0.0, max_value=100.0, value=5.0, step=0.5)
-            deal_value = st.number_input("Average Deal Value (₹)", min_value=0.0, value=5000.0, step=500.0)
+            deal_value = st.number_input("Average Deal Value ($)", min_value=0.0, value=5000.0, step=500.0)
 
         st.markdown("<div class='section-header'>Costs</div>", unsafe_allow_html=True)
-        infra_cost = st.number_input("Infra Cost per 1K Requests (₹)", min_value=0.0, value=25.0, step=1.0, key="scr_infra")
-        protection_cost = st.number_input("Bot Protection Cost (₹)", min_value=0.0, value=200000.0, step=10000.0, format="%.0f", key="scr_prot")
+        infra_cost = st.number_input("Infra Cost per 1K Requests ($)", min_value=0.0, value=25.0, step=1.0, key="scr_infra")
+        protection_cost = st.number_input("Bot Protection Cost ($)", min_value=0.0, value=200000.0, step=10000.0, format="%.0f", key="scr_prot")
 
         calc = st.button("Calculate ROI", key="scr_calc", type="primary")
 
@@ -591,7 +591,7 @@ elif page == "🕷️ Scraping":
             import pandas as pd
             chart_data = pd.DataFrame({
                 "Category": ["Revenue Saved", "Infra Saved", "Protection Cost"],
-                "Value (₹)": [r['revenue'], r['infra_saved'], protection_cost]
+                "Value ($)": [r['revenue'], r['infra_saved'], protection_cost]
             })
             st.markdown("<div class='section-header'>Breakdown Chart</div>", unsafe_allow_html=True)
             st.bar_chart(chart_data.set_index("Category"), color="#58a6ff")
@@ -621,17 +621,17 @@ elif page == "🔐 Account Takeover (ATO)":
         success_rate = st.number_input("Attack Success Rate (%)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
 
         st.markdown("<div class='section-header'>Business Impact per Account</div>", unsafe_allow_html=True)
-        account_value = st.number_input("Account Value (₹)", min_value=0.0, value=5000.0, step=100.0)
-        fraud_loss = st.number_input("Fraud Loss per Account (₹)", min_value=0.0, value=2000.0, step=100.0)
-        recovery_cost = st.number_input("Recovery Cost per Account (₹)", min_value=0.0, value=500.0, step=50.0)
+        account_value = st.number_input("Account Value ($)", min_value=0.0, value=5000.0, step=100.0)
+        fraud_loss = st.number_input("Fraud Loss per Account ($)", min_value=0.0, value=2000.0, step=100.0)
+        recovery_cost = st.number_input("Recovery Cost per Account ($)", min_value=0.0, value=500.0, step=50.0)
 
         st.markdown("<div class='section-header'>Protection Effectiveness</div>", unsafe_allow_html=True)
         detection = st.number_input("Detection Rate (%)", min_value=0.0, max_value=100.0, value=85.0, step=1.0)
         mitigation = st.number_input("Mitigation Rate (%)", min_value=0.0, max_value=100.0, value=90.0, step=1.0)
 
         st.markdown("<div class='section-header'>Costs</div>", unsafe_allow_html=True)
-        infra_cost = st.number_input("Infra Cost per 1K Requests (₹)", min_value=0.0, value=25.0, step=1.0, key="ato_infra")
-        protection_cost = st.number_input("Bot Protection Cost (₹)", min_value=0.0, value=500000.0, step=10000.0, format="%.0f", key="ato_prot")
+        infra_cost = st.number_input("Infra Cost per 1K Requests ($)", min_value=0.0, value=25.0, step=1.0, key="ato_infra")
+        protection_cost = st.number_input("Bot Protection Cost ($)", min_value=0.0, value=500000.0, step=10000.0, format="%.0f", key="ato_prot")
 
         calc = st.button("Calculate ROI", key="ato_calc", type="primary")
 
@@ -677,7 +677,7 @@ elif page == "🔐 Account Takeover (ATO)":
             import pandas as pd
             chart_data = pd.DataFrame({
                 "Category": ["Total Loss", "Recovered", "Infra Saved"],
-                "Value (₹)": [r['total_loss'], r['recovered'], r['infra_saved']]
+                "Value ($)": [r['total_loss'], r['recovered'], r['infra_saved']]
             })
             st.markdown("<div class='section-header'>Breakdown Chart</div>", unsafe_allow_html=True)
             st.bar_chart(chart_data.set_index("Category"), color="#58a6ff")
